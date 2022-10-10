@@ -8,7 +8,7 @@ const ContactList = ({ visibleLIst, deleteIt }) => {
         {visibleLIst.map(({ id, name, number }) => {
           return (
             <li key={id}>
-              <a href={'tel:' + { number }}>
+              <a href={`tel:${number}`}>
                 {name}: <span>{formatPhoneNumber(number)}</span>
               </a>
               <button

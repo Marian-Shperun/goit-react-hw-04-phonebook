@@ -10,6 +10,27 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
+
+  // фаза монтування
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+    console.log(parsedContacts);
+  }
+
+  // фаза оновлення
+  componentDidUpdate(prevProps, prevState) {
+    // щоб незациклити компонент визивати тільки при умові.
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      console.log('обновилось');
+    }
+  }
+
+  // --------
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -25,8 +46,8 @@ export class App extends Component {
       number,
     };
     //  перевірка
-    if (newContact.number.length !== 13 || newContact.number[0] !== '+') {
-      alert('the phone number is too short or does not start with +');
+    if (newContact.number.length !== 13) {
+      alert('the phone number is too short');
       return;
     }
 
