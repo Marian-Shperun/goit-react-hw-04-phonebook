@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { formatPhoneNumber } from 'react-phone-number-input';
 
 const ContactList = ({ visibleLIst, deleteIt }) => {
   return (
@@ -9,7 +8,7 @@ const ContactList = ({ visibleLIst, deleteIt }) => {
           return (
             <li key={id}>
               <a href={`tel:${number}`}>
-                {name}: <span>{formatPhoneNumber(number)}</span>
+                {name}: <span>{number}</span>
               </a>
               <button
                 key={id}
